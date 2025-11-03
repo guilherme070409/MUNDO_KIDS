@@ -1,0 +1,632 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Variáveis de tema (cores e transições) */
+:root{
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+/* Corpo geral da página */
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Tema escuro (ativado via classe .dark no body) */
+body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+/* ===== Barra Lateral ===== */
+ .barra-lateral{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;  
+}
+/* Estado: barra lateral recolhida */
+.barra-lateral.fechada{
+    width: 88px;
+}
+
+/* ===== Reusable code - Here ===== */
+/* Itens genéricos de lista na barra lateral */
+.barra-lateral li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Blocos de ícone/imagem */
+.barra-lateral header .imagem,
+.barra-lateral .icone{
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.barra-lateral .icone{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Cores de ícone e texto */
+.barra-lateral .texto,
+.barra-lateral .icone{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+/* Texto padrão da barra lateral */
+.barra-lateral .texto{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+/* Esconde textos quando recolhida */
+.barra-lateral.fechada .texto{
+    opacity: 0;
+}
+/* =========================== */
+
+/* Cabeçalho da barra lateral */
+.barra-lateral header{
+    position: relative;
+}
+
+/* Linha com logo e textos */
+.barra-lateral header .imagem-texto{
+    display: flex;
+    align-items: center;
+}
+.barra-lateral header .texto-logo{
+    display: flex;
+    flex-direction: column;
+}
+/* Nome do usuário/brand */
+header .imagem-texto .nome {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Subtítulo/ocupação */
+header .imagem-texto .profissao{
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+
+/* Wrapper da imagem */
+.barra-lateral header .imagem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo da barra lateral */
+.barra-lateral header .imagem img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+/* Botão flutuante para recolher/expandir */
+.barra-lateral header .alternar{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+/* Cor de ícone no tema escuro */
+body.dark .barra-lateral header .alternar{
+    color: var(--text-color);
+}
+
+/* Rotação quando barra está recolhida */
+.barra-lateral.fechada .alternar{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+/* Container da área de menu */
+.barra-lateral .menu{
+    margin-top: 40px;
+}
+
+/* Caixa de pesquisa */
+.barra-lateral li.caixa-pesquisa{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+/* Input da pesquisa */
+.barra-lateral li.caixa-pesquisa input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+/* Link padrão da barra lateral */
+.barra-lateral li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+/* Hover do link */
+.barra-lateral li a:hover{
+    background-color: var(--primary-color);
+}
+/* Estado ativo do link */
+.barra-lateral li a.active{
+    background-color: var(--primary-color);
+}
+/* Ícone/texto no hover */
+.barra-lateral li a:hover .icone,
+.barra-lateral li a:hover .texto{
+    color: var(--sidebar-color);
+}
+/* Ícone/texto quando ativo */
+.barra-lateral li a.active .icone,
+.barra-lateral li a.active .texto{
+    color: var(--sidebar-color);
+}
+/* Hover no tema escuro */
+body.dark .barra-lateral li a:hover .icone,
+body.dark .barra-lateral li a:hover .texto{
+    color: var(--text-color);
+}
+/* Ativo no tema escuro */
+body.dark .barra-lateral li a.active .icone,
+body.dark .barra-lateral li a.active .texto{
+    color: var(--text-color);
+}
+
+/* Área rolável do menu */
+.barra-lateral .barra-menu{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+/* Esconde scroll no WebKit */
+.barra-menu::-webkit-scrollbar{
+    display: none;
+}
+/* Container do switch de tema */
+.barra-lateral .barra-menu .modo{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+/* Espaço dos ícones de sol e lua */
+.barra-menu .modo .sol-lua{
+    height: 50px;
+    width: 60px;
+}
+
+/* Ícones sobrepostos (lua/sol) */
+.modo .sol-lua i{
+    position: absolute;
+}
+/* Sol oculto no claro */
+.modo .sol-lua i.sol{
+    opacity: 0;
+}
+/* Sol visível no escuro */
+body.dark .modo .sol-lua i.sol{
+    opacity: 1;
+}
+/* Lua oculta no escuro */
+body.dark .modo .sol-lua i.lua{
+    opacity: 0;
+}
+
+/* Botão do interruptor do tema */
+.barra-menu .conteudo-inferior .interruptor{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+/* Trilha do interruptor */
+.interruptor .chave{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+/* Pino do interruptor */
+.chave::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+/* Posição do pino no tema escuro */
+body.dark .chave::before{
+    left: 20px;
+}
+
+.inicio{
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+.inicio .texto{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.barra-lateral.fechada ~ .inicio{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+body.dark .inicio .texto{
+    color: var(--text-color);
+}
+
+/* ===== Seção de Vídeos ===== */
+.inicio .conteudo{
+    padding: 0 60px 60px;
+}
+
+/* Chips de categoria de vídeos */
+.categorias-video{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 0 20px;
+}
+/* Estilo base das etiquetas */
+.etiqueta{
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+/* Estado ativo/hover das etiquetas */
+.etiqueta.ativo,
+.etiqueta:hover{
+    background: var(--primary-color);
+    color: var(--sidebar-color);
+}
+
+/* Barra de ações da seção de vídeos */
+.barra-videos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0 24px;
+}
+/* Lado esquerdo da barra (botões) */
+.barra-videos .esquerda{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+/* Botões padrão */
+.botao{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+/* Botão primário (preenchido) */
+.botao.primario{
+    background: var(--primary-color);
+    color: var(--sidebar-color);
+}
+/* Botão fantasma (borda) */
+.botao.fantasma{
+    border-color: var(--toggle-color);
+    color: var(--text-color);
+}
+/* Botão perigoso/ação destrutiva */
+.botao.perigo{
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+
+/* Grade de cartões de vídeo */
+.grade-videos{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+/* Cartão de vídeo */
+.cartao-video{
+    grid-column: span 4;
+    background: var(--sidebar-color);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+}
+@media (max-width: 1200px){
+    .cartao-video{ grid-column: span 6; }
+}
+@media (max-width: 700px){
+    /* Ajustes móveis */
+    .inicio{ padding-bottom: 100px; }
+    .inicio .conteudo{ padding: 0 20px 60px; }
+    .cartao-video{ grid-column: span 12; }
+}
+/* Área de miniatura/thumbnail */
+.cartao-video .miniatura{
+    position: relative;
+    background: linear-gradient(135deg, #7f7bff, #b7b3ff);
+    height: 170px;
+}
+.cartao-video .miniatura.alt{ background: linear-gradient(135deg, #00c6ff, #0072ff); }
+.cartao-video .miniatura.news{ background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+.cartao-video .miniatura.live{ background: linear-gradient(135deg, #ff9966, #ff5e62); }
+.cartao-video .miniatura.shorts{ background: linear-gradient(135deg, #56ab2f, #a8e063); }
+/* Selo de categoria no thumbnail */
+.cartao-video .miniatura .selo{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+/* Duração do vídeo no thumbnail */
+.cartao-video .miniatura .duracao{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+/* Área de metadados do vídeo */
+.cartao-video .meta{
+    padding: 14px 14px 8px;
+    color: var(--text-color);
+}
+/* Título do vídeo */
+.cartao-video .titulo{
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 6px;
+}
+/* Descrição do vídeo */
+.cartao-video .descricao{
+    font-size: 13px;
+    opacity: 0.8;
+}
+/* Métricas do vídeo (views/likes/comentários) */
+.cartao-video .estatisticas{
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+/* Ações do cartão (editar/copiar/excluir) */
+.cartao-video .acoes{
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px 14px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ===== Modal: Novo Vídeo ===== */
+.fundo-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 200;
+}
+/* Exibe o backdrop quando .open */
+.fundo-modal.open{ display: flex; }
+.modal{
+    width: 100%;
+    max-width: 720px;
+    background: var(--sidebar-color);
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+/* Cabeçalho da modal */
+.cabecalho-modal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+/* Botão de fechar a modal */
+.btn-icone{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--toggle-color);
+    color: var(--text-color);
+    background: transparent;
+}
+/* Corpo da modal e formulário */
+.corpo-modal{ padding: 16px; }
+.formulario{ display: flex; flex-direction: column; gap: 14px; }
+.grade-form{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 700px){ .grade-form{ grid-template-columns: 1fr; } }
+.linha-form{ display: flex; flex-direction: column; gap: 8px; }
+.linha-form label{ font-size: 14px; color: var(--text-color); }
+.linha-form input,
+.linha-form select,
+.linha-form textarea{
+    border: 1px solid var(--toggle-color);
+    background: transparent;
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+/* Rodapé da modal */
+.rodape-modal{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+/* ===== Assinaturas ===== */
+.barra-assinaturas{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 10px 0 16px; }
+.container-tabela{ width:100%; overflow:auto; background: var(--sidebar-color); border-radius: 14px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+.tabela-assinaturas{ width:100%; border-collapse: collapse; min-width: 720px; }
+.tabela-assinaturas thead th{ text-align: left; font-weight: 600; color: var(--text-color); background: var(--primary-color-light); padding: 12px 14px; }
+.tabela-assinaturas tbody td{ padding: 12px 14px; color: var(--text-color); border-top: 1px solid rgba(0,0,0,0.06); }
+.selo-suave{ display:inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; line-height: 1; border: 1px solid transparent; }
+.selo-suave.sucesso{ color: #2ecc71; background: rgba(46,204,113,0.12); border-color: rgba(46,204,113,0.3); }
+.selo-suave.perigo{ color: #e74c3c; background: rgba(231,76,60,0.12); border-color: rgba(231,76,60,0.3); }
+.selo-suave.informacao{ color: #3498db; background: rgba(52,152,219,0.12); border-color: rgba(52,152,219,0.3); }
+.selo-suave.aviso{ color: #f39c12; background: rgba(243,156,18,0.12); border-color: rgba(243,156,18,0.3); }
+/* KPI cards */
+/* Grade e cartões de KPI */
+.grade-kpi{ display:grid; grid-template-columns: repeat(12, 1fr); gap:20px; margin-bottom:16px; }
+.cartao-kpi{ grid-column: span 3; background: var(--sidebar-color); border:1px solid rgba(0,0,0,0.06); border-radius:14px; padding:16px; box-shadow:0 6px 16px rgba(0,0,0,0.06); }
+@media (max-width: 1200px){ .cartao-kpi{ grid-column: span 6; } }
+@media (max-width: 700px){ .cartao-kpi{ grid-column: span 12; } }
+.titulo-kpi{ font-size:13px; color: var(--text-color); opacity:0.8; margin-bottom:6px; }
+.valor-kpi{ font-size:22px; color: var(--text-color); font-weight:600; }
+
+/* Filters */
+/* Filtros da seção Assinaturas */
+.filtros{ background: var(--sidebar-color); border:1px solid rgba(0,0,0,0.06); border-radius:14px; padding:14px; box-shadow:0 6px 16px rgba(0,0,0,0.06); margin-bottom:16px; }
+.linha-filtros{ display:grid; grid-template-columns: repeat(12, 1fr); gap:14px; }
+.filtros .linha-form{ grid-column: span 3; }
+@media (max-width: 1200px){ .filtros .linha-form{ grid-column: span 6; } }
+@media (max-width: 700px){ .filtros .linha-form{ grid-column: span 12; } }
+.acoes-filtros{ display:flex; justify-content:flex-end; gap:8px; padding-top:10px; }
+
+/* Row actions */
+.acoes-linha{ display:flex; gap:8px; }
+
+/* Pagination */
+/* Paginação da tabela */
+.paginacao{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 12px 0; }
+.paginacao .esquerda{ color: var(--text-color); font-size: 14px; }
+
+iframe{
+position: absolute;
+height: 170px;
+width: 350px;
+}

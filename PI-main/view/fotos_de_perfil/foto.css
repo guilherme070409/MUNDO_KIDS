@@ -1,0 +1,16 @@
+.sidebar__img {
+    width: 80px;              /* tamanho do círculo */
+    height: 80px;
+    border-radius: 50%;       /* círculo */
+    overflow: hidden;         /* corta qualquer sobra da imagem */
+    display: flex;            /* centraliza a img dentro */
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto; /* centraliza no container */
+}
+
+.sidebar__img img {
+    width: 100%;              /* ocupa todo o círculo */
+    height: 100%;
+    object-fit: cover;        /* corta sem distorcer */
+}
