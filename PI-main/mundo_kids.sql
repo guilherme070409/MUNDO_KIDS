@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/11/2025 às 11:38
+-- Tempo de geração: 05/11/2025 às 16:16
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -82,6 +82,26 @@ INSERT INTO `faixa_etaria` (`ID`, `limitacao`, `idade`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `fotos_perfil`
+--
+
+CREATE TABLE `fotos_perfil` (
+  `id` int(11) NOT NULL,
+  `caminho` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `fotos_perfil`
+--
+
+INSERT INTO `fotos_perfil` (`id`, `caminho`) VALUES
+(2, 'img/patrick.png'),
+(3, 'img/tartaruga_do_balacobaco.jpg'),
+(4, 'img/urso_polar.png');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `id_videos_id_playlist`
 --
 
@@ -133,7 +153,18 @@ INSERT INTO `pessoa` (`id`, `nome_pai`, `nome_mae`, `telefone`, `data_nascimento
 (40, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '0000-00-00', 0),
 (41, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '0100-01-01', 0),
 (42, 'Luiz Marcelo', 'Priscila', '(00) 52050-5050', '2009-06-01', 0),
-(43, 'victor', 'manzoli', '(05) 10606-0004', '0404-06-01', 0);
+(43, 'victor', 'manzoli', '(05) 10606-0004', '0404-06-01', 0),
+(44, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-22', 0),
+(45, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-13', 0),
+(46, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-12', 0),
+(47, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-06', 0),
+(48, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-07', 0),
+(49, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-08', 0),
+(50, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-08', 0),
+(51, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-10-30', 0),
+(52, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-10-29', 0),
+(53, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-14', 0),
+(54, 'Guilherme Moura', 'Guilherme Moura', '(44) 99975-9681', '2025-11-04', 0);
 
 -- --------------------------------------------------------
 
@@ -160,23 +191,17 @@ CREATE TABLE `usuarios` (
   `email` varchar(255) NOT NULL,
   `senha` varchar(110) NOT NULL,
   `is_adm` varchar(200) NOT NULL DEFAULT 'usuario',
-  `nome_de_usuario` varchar(500) NOT NULL
+  `nome_de_usuario` varchar(500) NOT NULL,
+  `fk_foto_perfil` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`fk_pessoa`, `ID`, `email`, `senha`, `is_adm`, `nome_de_usuario`) VALUES
-(NULL, 9, '31@gmail', '$2y$10$3v2A7kVhqcJOnlnNOJH7R.cWuSgsANQSyF29.TzAf3TMBonrzunj.', '0', 'gui'),
-(NULL, 10, '310@gmail', '$2y$10$PY.mBuDGv1rLh.r9L.QEtuERP5aP6Tw3e4gmZ8LJlQGh1w1IU3ugq', '0', 'gui'),
-(NULL, 11, '123@gmail.com', '$2y$10$H5fYRF3fyIadpweA61trWeiv8g8lA.edR4QORoEVILpSrHFrwZ.j6', '0', 'Guilherme Moura'),
-(NULL, 12, '10@gmail.com', '$2y$10$PrZf6WJ5WtVmYuno1jQtwuYVM0t1o584RD6rXkHD.Tx.XXCTY5LHe', '0', 'nd'),
-(NULL, 13, '1023@gmail.com', '$2y$10$/SDZmBOyngm4S4ihpGMq..irs9sM3PswjZp8Ap6l.j8m96bEYbnOW', '0', 'Guilherme Moura'),
-(NULL, 14, 'dd123@gmail.com', '$2y$10$iCtEOrv.PMK/ZpvX/wu.4OlkY8oWUWCSKXaeXYoA29TMnFdKC9P5K', '2', 'gjmowpspmgroim'),
-(NULL, 15, 'do@gmail.com', '$2y$10$AURWMm2xmfbkEgKwK7bhS.HENy.T5DWXcP..VwXvDeNkYmshe529y', '2', 'Guilherme Moura'),
-(NULL, 16, 'guigatomoura@gmail.com', '$2y$10$dgTMHQI6G0YQOxM7fz02ZOBqsInF0YJ7kU9x69qFlwLkINimcJ8Ya', 'CEO', 'Fulaninho'),
-(NULL, 17, 'kayo@gmail.com', '$2y$10$1pSCC.Is7WA5yMyXz0gfb.lqZCAwUKESf2nAF.IHr272J4FA.vAA6', 'usuario', 'Big Big');
+INSERT INTO `usuarios` (`fk_pessoa`, `ID`, `email`, `senha`, `is_adm`, `nome_de_usuario`, `fk_foto_perfil`) VALUES
+(NULL, 16, 'guigatomoura@gmail.com', '$2y$10$dgTMHQI6G0YQOxM7fz02ZOBqsInF0YJ7kU9x69qFlwLkINimcJ8Ya', 'CEO', 'Fulaninho', NULL),
+(54, 22, '1@gmail.com', '$2y$10$AawUPUxyQ5BeSwOzdSmLyu1oamgi9HeU2/2YAwde/fMr6dS42n.Da', 'usuario', '1@gmail.com', 4);
 
 -- --------------------------------------------------------
 
@@ -228,6 +253,12 @@ ALTER TABLE `faixa_etaria`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Índices de tabela `fotos_perfil`
+--
+ALTER TABLE `fotos_perfil`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `id_videos_id_playlist`
 --
 ALTER TABLE `id_videos_id_playlist`
@@ -261,7 +292,8 @@ ALTER TABLE `playlist`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_pessoa` (`fk_pessoa`);
+  ADD KEY `fk_pessoa` (`fk_pessoa`),
+  ADD KEY `fk_foto_perfil` (`fk_foto_perfil`);
 
 --
 -- Índices de tabela `videos`
@@ -294,6 +326,12 @@ ALTER TABLE `faixa_etaria`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de tabela `fotos_perfil`
+--
+ALTER TABLE `fotos_perfil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `id_videos_id_playlist`
 --
 ALTER TABLE `id_videos_id_playlist`
@@ -309,7 +347,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT de tabela `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `playlist`
@@ -321,7 +359,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `videos`
@@ -357,7 +395,8 @@ ALTER TABLE `likes`
 -- Restrições para tabelas `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_pessoa` FOREIGN KEY (`fk_pessoa`) REFERENCES `pessoa` (`id`);
+  ADD CONSTRAINT `fk_pessoa` FOREIGN KEY (`fk_pessoa`) REFERENCES `pessoa` (`id`),
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`fk_foto_perfil`) REFERENCES `fotos_perfil` (`id`);
 
 --
 -- Restrições para tabelas `videos`

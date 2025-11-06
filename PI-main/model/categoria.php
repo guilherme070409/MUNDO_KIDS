@@ -22,6 +22,7 @@ public static function buscarcategoria($pdo, $categoria)
   public static function listar($pdo) {
     $stmt = $pdo->prepare("SELECT * FROM categoria ORDER BY nome_da_categoria ASC");
     $stmt->execute();
+return $pdo->lastInsertId();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 }

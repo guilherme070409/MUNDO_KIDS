@@ -34,6 +34,7 @@ public static function listar($pdo) {
         ORDER BY v.id DESC
     ");
     $stmt->execute();
+return $pdo->lastInsertId();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 public static function deletar($pdo, $id)
@@ -41,6 +42,7 @@ public static function deletar($pdo, $id)
         $stmt = $pdo->prepare("DELETE FROM videos WHERE id = :ID");
         $stmt->bindParam(':ID', $id, PDO::PARAM_INT);
         return $stmt->execute();
+return $pdo->lastInsertId();
     }
 
 public static function editar($pdo, $id, $titulo, $url, $fk_categoria, $thumbnail, $descricao){

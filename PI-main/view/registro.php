@@ -25,25 +25,31 @@
   <div class="container">
     <h2>Registrar-se no Mundo Kids</h2>
     <form action="../controller/Registro.php" method="POST" onsubmit="return validarSenhas()">
-       <label>Foto de perfil:</label>
-    <div>
-        <button type="button" id="abrirGaleria">Escolha sua foto de perfil</button>
-        <input type="hidden" name="avatar" id="avatarSelecionado" required>
-        <div id="previewAvatar" style="margin-top:10px;"></div>
-    </div>
 
-    <!-- Galeria de avatares -->
-    <div id="galeria" class="galeria">
-        <img src="avatars/avatar1.png" class="avatar-img" alt="Avatar 1">
-        <img src="avatars/avatar2.png" class="avatar-img" alt="Avatar 2">
-        <img src="avatars/avatar3.png" class="avatar-img" alt="Avatar 3">
-        <img src="avatars/avatar4.png" class="avatar-img" alt="Avatar 4">
-    </div>
-    <div class="input-group">
+      <div>
+        <label>Foto de perfil:</label>
+        <div>
+          <button type="button" id="abrirGaleria">Escolher foto de perfil</button>
+          <input type="hidden" name="avatar" id="avatarSelecionado" required>
+          <div id="previewAvatar" style="margin-top:10px;"></div>
+        </div>
+
+        <div id="galeria" class="galeria" style="display:none;">
+          <?php
+          $files = glob("img/*.{png,jpg,jpeg}", GLOB_BRACE);
+          foreach ($files as $file) {
+              echo "<img src='$file' class='avatar-img'>";
+          }
+          ?>
+        </div>
+      </div>
+
+      <div class="input-group">
         <label for="fullName">Nome completo</label>
         <input type="text" name="fullName" id="fullName" required />
       </div>
-            <div class="input-group">
+      
+      <div class="input-group">
         <label for="userName">Nome de usuario</label>
         <input type="text" name="userName" id="userName" required />
       </div>
@@ -69,6 +75,7 @@
           <input type="tel" name="telefone" id="telefone" pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(99) 99999-9999" required />
         </div>
       </div>
+      
       <div class="input-group">
         <label for="data_nascimento">Data de nascimento</label>
         <input type="date" name="data_nascimento" id="data_nascimento" required />
@@ -97,6 +104,52 @@
     <?php endif; ?>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const botaoGaleria = document.getElementById('abrirGaleria');
+      const galeria = document.getElementById('galeria');
+      const avatarInput = document.getElementById('avatarSelecionado');
+      const preview = document.getElementById('previewAvatar');
+
+      // Abrir/fechar galeria
+      botaoGaleria.addEventListener('click', () => {
+        galeria.style.display = galeria.style.display === 'flex' ? 'none' : 'flex';
+      });
+
+      // Selecionar avatar
+      const avatares = document.querySelectorAll('.avatar-img');
+      avatares.forEach(avatar => {
+        avatar.addEventListener('click', () => {
+          // Remove a seleção de todos
+          avatares.forEach(a => a.classList.remove('selecionado'));
+          // Marca o selecionado
+          avatar.classList.add('selecionado');
+          // Coloca o valor no input hidden (apenas o nome do arquivo)
+          const fileName = avatar.src.split('/').pop();
+          avatarInput.value = fileName;
+          // Mostra o preview
+          preview.innerHTML = `<img src="${avatar.src}" style="width:100px;height:100px;border-radius:50%;border:3px solid #007bff;">`;
+          // Fecha a galeria
+          galeria.style.display = 'none';
+        });
+      });
+
+      // Máscaras para telefone
+      function maskTelefone(value) {
+        value = value.replace(/\D/g, "");
+        value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+        value = value.replace(/(\d{5})(\d)/, "$1-$2");
+        value = value.substring(0, 15);
+        return value;
+      }
+
+      const tel = document.getElementById('telefone');
+      if (tel) {
+        tel.addEventListener('input', function(e) {
+          e.target.value = maskTelefone(e.target.value);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

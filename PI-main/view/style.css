@@ -1349,3 +1349,24 @@ body.login-page .btn-voltar {
     font-size: 1.3rem;
   }
 }
+.galeria {
+  display: none;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.avatar-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.avatar-img:hover {
+  border-color: #007bff;
+  transform: scale(1.1);
+}
