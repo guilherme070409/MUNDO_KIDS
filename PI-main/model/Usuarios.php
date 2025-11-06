@@ -52,5 +52,18 @@ class usuario
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+public static function buscarCompleto($pdo, $login) {
+    $stmt = $pdo->prepare("
+        SELECT u.*, f.caminho AS foto
+        FROM usuarios u
+        LEFT JOIN fotos_perfil f ON u.fk_foto_perfil = f.id
+        WHERE u.email = ? OR u.nome_de_usuario = ?
+        LIMIT 1
+    ");
+    $stmt->execute([$login, $login]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 }
 ?>

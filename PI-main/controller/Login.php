@@ -8,40 +8,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login = $_POST['username'] ?? ''; 
     $senha = $_POST['password'] ?? '';
 
-    $usuario = usuario::buscarPorEmail($pdo, $login);
+  $usuario = Usuario::buscarCompleto($pdo, $login);
 
-    if ($usuario && password_verify($senha, $usuario['senha'])) {
+
+   if ($usuario && password_verify($senha, $usuario['senha'])) {
+
+    // Salva foto na sessão
+    $_SESSION['foto'] = $usuario['foto'] ? "../" . $usuario['foto'] : "../fotos_de_perfil/default.png";
+
+    if ($usuario['is_adm'] == 'usuario') {
+        $_SESSION['pessoa_nome'] = $usuario['nome_de_usuario'];
+        $_SESSION['pessoa_email'] = $usuario['email'];
+        $_SESSION['tipo'] = 'pessoa';
+        $_SESSION['msg'] = "Login realizado com sucesso!";
+        $_SESSION['msg_tipo'] = "sucesso";
         
-        if ($usuario['is_adm'] == 'usuario') {
-            $_SESSION['pessoa_nome'] = $usuario['nome_de_usuario'];
-            $_SESSION['pessoa_email'] = $usuario['email'];
-            $_SESSION['tipo'] = 'pessoa';
-            $_SESSION['msg'] = "Login realizado com sucesso!";
-            $_SESSION['msg_tipo'] = "sucesso";
-            
-            exibirMensagemRedirect(
-                'Login realizado',
-                'Login realizado com sucesso!,' . 
-                "seja bem vindo " . $usuario['nome_de_usuario'],
-                'Você será redirecionado em instantes...',
-                '../view/Pagina_inicial/index.php'
-            );
-        } else  {
-            $_SESSION['admin_nome'] = $usuario['nome_de_usuario'];
-            $_SESSION['admin_cargo'] = $usuario['is_adm'];
-            $_SESSION['tipo'] = 'admin';
-            $_SESSION['msg'] = "Login realizado com sucesso!";
-            $_SESSION['msg_tipo'] = "sucesso";
+        exibirMensagemRedirect(
+            'Login realizado',
+            'Login realizado com sucesso!,' . 
+            "seja bem vindo " . $usuario['nome_de_usuario'],
+            'Você será redirecionado em instantes...',
+            '../view/Pagina_inicial/index.php'
+        );
+    } else  {
+        $_SESSION['admin_nome'] = $usuario['nome_de_usuario'];
+        $_SESSION['admin_cargo'] = $usuario['is_adm'];
+        $_SESSION['tipo'] = 'admin';
+        $_SESSION['msg'] = "Login realizado com sucesso!";
+        $_SESSION['msg_tipo'] = "sucesso";
 
-   
-                 exibirMensagemRedirect(
-                'Admin',
-                'Bem-vindo(a), ' . htmlspecialchars($usuario['nome_de_usuario']) . '!',
-                'Logando na página de admin...',
-                '../view/Adm_page/'
-            );
-        }
-    } else {
+        exibirMensagemRedirect(
+            'Admin',
+            'Bem-vindo(a), ' . htmlspecialchars($usuario['nome_de_usuario']) . '!',
+            'Logando na página de admin...',
+            '../view/Adm_page/'
+        );
+    }
+}
+ else {
         $_SESSION['erro'] = "E-mail ou senha incorretos.";
         $_SESSION['msg_tipo'] = "erro";
         header('Location: ../view/login.php');

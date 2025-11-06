@@ -56,7 +56,8 @@ if(isset($_POST['id'])){
             <!-- Logo e texto do topo da barra lateral -->
             <div class="imagem-texto">
                 <span class="imagem">
-                    <img src="../fotos_de_perfil/Patrick.png" alt="">
+                 <img src="<?php echo $_SESSION['foto']; ?>" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">
+
                 </span>
 
                 <div class="texto texto-logo">
